@@ -1,7 +1,7 @@
 import fs from 'fs'
 import assert from 'assert'
 import parser from './parser.mjs'
-import { prettify } from './compiler.mjs'
+import { prettify, toJS } from './compiler.mjs'
 
 
 const [ filter ] = process.argv.slice(2)
@@ -10,9 +10,9 @@ const log = console.log
 let hasFailed = false
 const tests = Promise.all(fs.readdirSync('./tests')
   .map(async filename => ({
-    filename: filename.split(/(\.ast\.json|\.zed)$/)[0],
+    filename: filename.split(/(\.ast\.json|\.zed|\.js)$/)[0],
     content: await fs.promises.readFile(`./tests/${filename}`, 'utf8'),
-    type: /\.ast\.json$/.test(filename) ? 'ast' : 'zed'
+    type: filename.split('.')[1]
 
   })))
   .then(tests => Object.entries(tests.reduce((acc, { filename, type, content }) => {
@@ -20,7 +20,7 @@ const tests = Promise.all(fs.readdirSync('./tests')
       ;(acc[filename] || (acc[filename] = {}))[type] = content
       return acc
     }, {}))
-    .forEach(async ([ name, { ast, zed } ]) => {
+    .forEach(async ([ name, { ast, zed, js } ]) => {
       // log('        ---====||||====---')
       const logData = []
       console.log = (...args) => { logData.push(args) }
@@ -32,6 +32,11 @@ const tests = Promise.all(fs.readdirSync('./tests')
             JSON.stringify(parsed, null, 2), 'utf8')
         } else {
           assert.deepStrictEqual(JSON.parse(ast), parsed)
+        }
+        if (!js) {
+          log('generating js')
+          await fs.promises.writeFile(`./tests/${name}.js`,
+            parser(zed).map(toJS).join('\n'), 'utf8')
         }
         log('=> O', name)
       } catch (err) {
