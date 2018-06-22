@@ -1,21 +1,16 @@
 const backslashed = {}
 const getBackslashed = n => backslashed[n] || (backslashed[n] = eval(`'\\${n}'`))
 
-import { prettify } from './compiler.mjs'
-
-const OPEN = { type: 'list', value: 'open' }
-const CLOSE = { type: 'list', value: 'close' }
 const tokenize = raw => {
-  let i = -1
   let value = ''
+  let type = ''
   let inStr = false
   let backslash = false
   let inIndent = false
-  let type = ''
   let indent = 0
   let expr = []
   const lines = [ expr ]
-  const add = list => {
+  const add = () => {
     if (!inStr && !value) return
     const node = { type, value }
     if (!expr.length) {
@@ -24,9 +19,9 @@ const tokenize = raw => {
     expr.push(node)
     value = ''
     type = ''
-    console.log('add', lines, expr)
   }
 
+  let i = -1
   while (++i < raw.length) {
     const c = raw[i]
     if (inStr) {
@@ -57,7 +52,6 @@ const tokenize = raw => {
       add()
       indent = 0
       inIndent = true
-      console.log('nl', expr)
       lines.push(expr = [])
     } else {
       inIndent = false
@@ -71,8 +65,7 @@ const tokenize = raw => {
           add()
           const next = []
           next.parent = expr
-          expr.push(next)
-          expr = next
+          expr.push(expr = next)
           break
         }
         case ')': {
@@ -122,21 +115,17 @@ const recurSolve = line => {
 
 const indentify = (lines) => {
   const result = []
-  // console.log('lines', lines)
   for (let [ index, line ] of Object.entries(lines)) {
     const { indent } = line
     let parent = result
     while (--index >= 0) {
       const l = lines[index]
       if (l.indent < indent) {
-        // console.log('parent', l.indent, indent, line[0].value)
         parent = l
         break
       }
     }
-
     parent.push(line)
-    // console.log(prettify(solve(result)))
   }
   return result
 }
