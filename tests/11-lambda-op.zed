@@ -1,0 +1,53 @@
+/*
+a % b
+
+let g 'pouet'
+let d (console.log %lol %pouet 'hey')
+d g
+d g%pouet
+
+["a", "%", "b"]
+
+[ "function", ["$"], [ "a", "$", "b" ] ]
+$ => a($, b)
+
+
+
+const g 'pouet'
+const d (console.log %lol %pouet 'hey')
+d g
+d g%pouet
+
+
+
+let g 'pouet'
+let d (console.log %lol %pouet 'hey')
+d g
+d g%pouet
+
+[
+  [ "let", "g", "'pouet'" ],
+  [ "let", "d", [ "console.log", "%lol", "%pouet", "'hey'" ] ],
+  [ "d", "g" ],
+  [ "d", "g%pouet" ],
+]
+
+[
+  [ "let", "g", "'pouet'" ],
+  [ "let", "d", [ "function", { "lol": 0, "pouet": 1 }, [ "console.log", "$lol", "$pouet", "'hey'" ] ] ],
+  [ "d", "g" ],
+  [ "d", "g%pouet" ],
+]
+
+[
+  let[ "g", "'pouet'" ],
+  let[ "d", function{lol,pouet}[ "console.log", "$lol", "$pouet", "'hey'" ] ],
+  [ "d", "g" ],
+  [ "d", "undefined", "g" ],
+]
+
+const g = 'pouet'
+const d = ($lol, $pouet) => console.log($lol, $pouet, 'hey')
+d(g)
+d(undefined, g)
+*/

@@ -1,0 +1,67 @@
+{
+  "type": "Program",
+  "start": 0,
+  "end": 25,
+  "body": [
+    {
+      "type": "ExpressionStatement",
+      "start": 0,
+      "end": 25,
+      "expression": {
+        "type": "CallExpression",
+        "start": 0,
+        "end": 25,
+        "callee": {
+          "type": "Identifier",
+          "start": 0,
+          "end": 3,
+          "name": "log"
+        },
+        "arguments": [
+          {
+            "type": "Literal",
+            "start": 4,
+            "end": 5,
+            "value": 1,
+            "raw": "1"
+          },
+          {
+            "type": "Literal",
+            "start": 6,
+            "end": 7,
+            "value": 2,
+            "raw": "2"
+          },
+          {
+            "type": "Literal",
+            "start": 8,
+            "end": 12,
+            "value": "hey",
+            "raw": "'hey'"
+          },
+          {
+            "type": "Literal",
+            "start": 14,
+            "end": 16,
+            "value": 24,
+            "raw": "24"
+          },
+          {
+            "type": "Identifier",
+            "start": 17,
+            "end": 22,
+            "name": "pouet"
+          },
+          {
+            "type": "Literal",
+            "start": 23,
+            "end": 25,
+            "value": 78,
+            "raw": "78"
+          }
+        ]
+      }
+    }
+  ],
+  "sourceType": "module"
+}

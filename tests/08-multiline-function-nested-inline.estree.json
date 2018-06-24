@@ -1,0 +1,60 @@
+{
+  "type": "Program",
+  "start": 0,
+  "end": 19,
+  "body": [
+    {
+      "type": "ExpressionStatement",
+      "start": 0,
+      "end": 19,
+      "expression": {
+        "type": "CallExpression",
+        "start": 0,
+        "end": 19,
+        "callee": {
+          "type": "Identifier",
+          "start": 0,
+          "end": 3,
+          "name": "log"
+        },
+        "arguments": [
+          {
+            "type": "Literal",
+            "start": 6,
+            "end": 8,
+            "value": 34,
+            "raw": "34"
+          },
+          {
+            "type": "CallExpression",
+            "start": 11,
+            "end": 19,
+            "callee": {
+              "type": "Identifier",
+              "start": 11,
+              "end": 14,
+              "name": "min"
+            },
+            "arguments": [
+              {
+                "type": "Literal",
+                "start": 15,
+                "end": 16,
+                "value": 0,
+                "raw": "0"
+              },
+              {
+                "type": "Literal",
+                "start": 17,
+                "end": 19,
+                "value": 23,
+                "raw": "23"
+              }
+            ]
+          }
+        ]
+      }
+    }
+  ],
+  "sourceType": "module"
+}

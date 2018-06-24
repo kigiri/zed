@@ -1,0 +1,7 @@
+/*
+ this is a comment
+*/
+log 42 /**//* this is too */
+/*
+ this one suck
+*/
